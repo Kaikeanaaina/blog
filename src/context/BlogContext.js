@@ -10,7 +10,10 @@ export const BlogProvider = ({children}) => {
     // not using export default
     //can think of the return like
     // 'return <BlogContext.Provider>{children}</BlogContext.Provider>'
-    return <BlogContext.Provider value={5}>
+    // can't pass down an value object yet
+    return <BlogContext.Provider value={[1,2,3]}>
         {children}
     </BlogContext.Provider>
 }
+
+export default BlogContext;
