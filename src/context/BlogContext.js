@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 const BlogContext = React.createContext();
 // a pipe, an object responsible for giving information 
@@ -11,9 +11,18 @@ export const BlogProvider = ({children}) => {
     //can think of the return like
     // 'return <BlogContext.Provider>{children}</BlogContext.Provider>'
     // can't pass down an value object yet
-    return <BlogContext.Provider value={[1,2,3]}>
+
+    const [blogPosts, setBlogPosts] = useState([])
+
+    const addBlogPost = () => {
+        setBlogPosts([ ...blogPosts, { title: `Blog Post #${blogPosts.length + 1}`}]);
+    }
+
+    // the value layout is how you pass data and functions down to the children
+    // {data: blogPosts, addBlogPost: addBlogPost}
+    return (<BlogContext.Provider value={{data: blogPosts, addBlogPost }}>
         {children}
-    </BlogContext.Provider>
+    </BlogContext.Provider>)
 }
 
 export default BlogContext;
