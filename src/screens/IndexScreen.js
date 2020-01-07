@@ -12,7 +12,7 @@ import { Context } from '../context/BlogContext'
     // import { Context as ImageContext } from '../context/ImageContext'
 import {Feather} from '@expo/vector-icons';
 
-const IndexScreen = () => {
+const IndexScreen = ({navigation}) => {
     const { state, addBlogPost, deleteBlogPost} = useContext(Context);
 
     return (
@@ -22,17 +22,23 @@ const IndexScreen = () => {
                 data={state}
                 keyExtractor={blogPost => blogPost.id.toString()}
                 renderItem={({item}) => {
-                    return <View style={styles.row}>
-                        <Text style={styles.title}>{item.title} - {item.id} </Text>
-                        <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                            <Feather style={styles.icon} name="trash" />
+                    return (
+                        <TouchableOpacity onPress={() => navigation.navigate('Show', { id: item.id})}>
+                            <View style={styles.row}>
+                                <Text style={styles.title}>{item.title} - {item.id} </Text>
+                                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                                    <Feather style={styles.icon} name="trash" />
+                                </TouchableOpacity>
+                            </View>
                         </TouchableOpacity>
-                    </View>
+                    )
                 }}
             />
         </View>
     )
 }
+
+//second argument of the navigation.navigate sends the information/content/data to the screen
 
 const styles = StyleSheet.create({
     row: {
