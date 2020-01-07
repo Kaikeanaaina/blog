@@ -4,7 +4,7 @@ import React, { useContext } from 'react'
 // give us access to things' values props
 // whenever we want to pass down information
 // useContext is what we use
-import { View, Text, StyleSheet, FlatList, Button } from 'react-native'
+import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native'
 import { Context } from '../context/BlogContext'
 // this could be use if you have multiple Context, that data is flowing from
 // ie
@@ -23,8 +23,10 @@ const IndexScreen = () => {
                 keyExtractor={blogPost => blogPost.title}
                 renderItem={({item}) => {
                     return <View style={styles.row}>
-                        <Text style={styles.title}>{item.title}</Text>
-                        <Feather style={styles.icon} name="trash" />
+                        <Text style={styles.title}>{item.title} - {item.id} </Text>
+                        <TouchableOpacity onPress={() => console.log(item.id)}>
+                            <Feather style={styles.icon} name="trash" />
+                        </TouchableOpacity>
                     </View>
                 }}
             />
