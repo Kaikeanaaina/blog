@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const ShowScreen = () => {
+const ShowScreen = ({ navigation }) => {
+    navigation.getParam('id')
     return (
         <View>
             <Text>ShowScreen</Text>
